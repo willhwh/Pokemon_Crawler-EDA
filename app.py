@@ -57,15 +57,7 @@ version_infos=[
             "/api/v1.0/type":"Gets a list of available pokemon types.",
             "/api/v1.0/type/<type>":[
                 {
-                    "Pokemon_Name" : {
-                        "Type1":"The first type of this Pokemon",
-                        "Type2":"The second type of this Pokemon",
-                        'HP':'The initial HP points for this Pokemon',
-                        'ATK':'The initial ATK points for this Pokemon',
-                        'DEF':'The initial DEF points for this Pokemon',
-                        'SP_ATK':'The initial SP_ATK points for this Pokemon',
-                        'SP_DEF':'The initial SP_DEF points for this Pokemon',
-                        'SPD':'The initial SPD points for this Pokemon',
+                    "Type" : {
                         'Damaged Normally by':'A list of type this Pokemon is damaged noramlly by.',
                         'Weak to':'A list of type this Pokemon is weak to.',
                         'Immue to':'A list of type this Pokemon is immue to.',
