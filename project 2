@@ -1,0 +1,6 @@
+1. mongodb
+2. use Pokemon_DB==create db
+3. db.createCollection("Pokemon_Table")==create collection
+
+
+(link:https://www.tutorialspoint.com/mongodb/mongodb_create_collection.htm)
