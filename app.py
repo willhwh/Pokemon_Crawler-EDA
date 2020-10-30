@@ -84,13 +84,7 @@ version_infos=[
                     }
                 }
             ]
-
-
         }
-
-
-
-
     }
 ]
 
@@ -99,21 +93,20 @@ version_infos=[
 # ROUTES
 ########################################
 
-@app.route("/")
+@app.route(routes["home"])
 def home():
-    mars_data = mongo.db.mars.find_one()
-    mars_table=pd.read_html('Mars_facts.html')
-    return render_template("index.html",mars_data=mars_data,mars_table=mars_table)
+    """
+    The homepage.
 
-@app.route("/api")
-def api_page():
+    Returns
+    -------
+    Flask Rendered Template :
+        The HTML to show.
+    """
+
+    return render_template(templates["home"])
 
 
-@app.route('/scrape')
-def scrape_mars():
-    mars_data=Mars_scrape.scrape()
-    mongo.db.mars.update({}, mars_data, upsert=True)
-    return redirect('/')
 
 
 if __name__ == "__main__":
