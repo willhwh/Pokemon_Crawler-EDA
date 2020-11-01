@@ -26,8 +26,7 @@ api_current_version = "v1.0"
 
 routes = {
     "home": "/",
-    "api_versions": "/api",
-    "api_docs": "/api/<version>",
+    "api_docs": "/api",
 }
 
 templates = {
@@ -39,11 +38,9 @@ templates = {
 
 version_infos=[
     {
-        "name":"v1.0",
-        "url":"/api/v1.0",
         "documentation":{
-            "/api/v1.0/type":"Gets a list of available pokemon types.",
-            "/api/v1.0/type/<type>":[
+            "/api/type":"Gets a list of available pokemon types.",
+            "/api/type/<type>":[
                 {
                     "Type" : {
                         'Damaged Normally by':'A list of type this Pokemon is damaged noramlly by.',
@@ -53,8 +50,8 @@ version_infos=[
                     }
                 }
             ],
-            "/api/v1.0/name":"Gets a list of available Pokemon names.",
-            "/api/v1.0/name/<name>":[
+            "/api/name":"Gets a list of available Pokemon names.",
+            "/api/name/<name>":[
                 {
                     "Pokemon_Name" : {
                         "Type1":"The first type of this Pokemon",
@@ -95,23 +92,6 @@ def home():
     return render_template(templates["home"])
 
 
-@app.route(routes["api_versions"])
-def api_version():
-    """
-    Shows the documentation for a specific API.
-
-    Parameters
-    ----------
-    version : string
-        The API version to show.
-
-    Returns
-    -------
-    Flask Rendered Template :
-        The HTML to show.
-    """
-    return jsonify(version_infos[0]['documentation'])
-
 @app.route(routes["api_docs"])
 def api_docs():
     """
@@ -123,7 +103,7 @@ def api_docs():
         The HTML to show.
     """
 
-    return render_template(templates["home"])
+    return jsonify(version_infos[0]['documentation'])
 
 
 
