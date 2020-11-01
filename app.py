@@ -2,10 +2,9 @@
 # IMPORTS
 ########################################
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, jsonify
 from flask_pymongo import PyMongo
 import pandas as pd
-import Mars_scrape
 import os
 
 
@@ -29,17 +28,6 @@ routes = {
     "home": "/",
     "api_versions": "/api",
     "api_docs": "/api/<version>",
-
-
-
-    "api_docs_year": "/api/<version>/year",
-    "api_docs_city": "/api/<version>/city",
-    "api_docs_precinct": "/api/<version>/precinct",
-    "api_docs_neighborhood": "/api/<version>/neighborhood",
-    "api_year": "/api/<version>/year/<year>",
-    "api_city": "/api/<version>/city/<cityID>",
-    "api_precinct": "/api/<version>/precinct/<precinctID>",
-    "api_neighborhood": "/api/<version>/neighborhood/<neighborhoodID>"
 }
 
 templates = {
@@ -64,7 +52,7 @@ version_infos=[
                         'Resisant to':'A list of type this Pokemon is resistan to.'
                     }
                 }
-            ]
+            ],
             "/api/v1.0/name":"Gets a list of available Pokemon names.",
             "/api/v1.0/name/<name>":[
                 {
@@ -106,6 +94,36 @@ def home():
 
     return render_template(templates["home"])
 
+
+@app.route(routes["api_versions"])
+def api_version():
+    """
+    Shows the documentation for a specific API.
+
+    Parameters
+    ----------
+    version : string
+        The API version to show.
+
+    Returns
+    -------
+    Flask Rendered Template :
+        The HTML to show.
+    """
+    return jsonify(version_infos[0]['documentation'])
+
+@app.route(routes["api_docs"])
+def api_docs():
+    """
+    The homepage.
+
+    Returns
+    -------
+    Flask Rendered Template :
+        The HTML to show.
+    """
+
+    return render_template(templates["home"])
 
 
 
