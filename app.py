@@ -15,7 +15,7 @@ import os
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Prevent caching
 mongo = PyMongo(app, uri="mongodb://localhost:27017/Pokemon_DB")
-pokemon_collection = mongo.Pokemon_Table
+pokemon_collection = mongo.db.Pokemon_Table
 
 
 ########################################
@@ -117,7 +117,7 @@ def type():
     A list of pokemon type
     """
     type_document=pokemon_collection.find({"Search_Id":'type_list'})['Type_list']
-    
+    return(type_document)
 
 
 
