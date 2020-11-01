@@ -15,18 +15,21 @@ import os
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Prevent caching
 mongo = PyMongo(app, uri="mongodb://localhost:27017/Pokemon_DB")
-
+pokemon_collection = mongo.Pokemon_Table
 
 
 ########################################
 # CONSTANTS
 ########################################
 
-api_current_version = "v1.0"
 
 routes = {
     "home": "/",
     "api_docs": "/api",
+    "type":'/api/type',
+    "type_select":"/api/type/<type>",
+    "name":'/api/name',
+    "name_select":'/api/name/<name>'
 }
 
 templates = {
@@ -95,17 +98,32 @@ def home():
 @app.route(routes["api_docs"])
 def api_docs():
     """
-    The homepage.
+    The api document page.
 
     Returns
     -------
-    Flask Rendered Template :
-        The HTML to show.
+    A jsonify documentation
     """
 
     return jsonify(version_infos[0]['documentation'])
 
+@app.route(routes["type"])
+def type():
+    """
+    The type list.
 
+    Returns
+    -------
+    A list of pokemon type
+    """
+    type_document=pokemon_collection.find({"Search_Id":'type_list'})['Type_list']
+    
+
+
+
+########################################
+# RUN FLASK
+########################################
 
 if __name__ == "__main__":
     app.run(debug=True)
