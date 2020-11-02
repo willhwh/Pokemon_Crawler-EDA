@@ -91,8 +91,8 @@ def home():
     Flask Rendered Template :
         The HTML to show.
     """
-
-    return render_template(templates["home"])
+    type_document=pokemon_collection.find_one({"Search_Id":'Type_List'})
+    return render_template(templates["home"],type_document=type_document)
 
 
 @app.route(routes["api_docs"])
@@ -116,9 +116,14 @@ def type():
     -------
     A list of pokemon type
     """
-    type_document=pokemon_collection.find({"Search_Id":'type_list'})['Type_list']
-    return(type_document)
-
+    
+    type_document=pokemon_collection.find_one({"Search_Id":'Type_List'})
+    type_list={}
+    types=[]
+    for i in type_document["Types"]:
+        types.append(i[1])
+    type_list.update({"Type_List":types})
+    return jsonify(type_list)
 
 
 ########################################
