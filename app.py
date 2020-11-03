@@ -128,6 +128,31 @@ def type():
 
     return jsonify(type_list)
 
+@app.route(routes["type_select"])
+def type_select(type):
+    """
+    The selected type's detail.
+
+    Returns
+    -------
+    A list of strength and weakness for selected type.
+    """
+    #Retrieved type list from database.
+    print(type)
+    type_document=pokemon_collection.find_one({'Type': type})
+
+    #Create jsonify data structure
+    feature_dict={}
+    feature_list=[]
+    feature_dict.update({"Type":type_document["Type"]})
+
+    feature_list.append({"Strong Against": type_document["Strong Against"]})
+    feature_list.append({"Weak Against":type_document["Weak Against"]})
+    feature_list.append({"Resistant To":type_document["Resistant To"]})
+    feature_list.append({"Vulnerable To":type_document["Vulnerable To"]})
+
+    feature_dict.update({"Detail":feature_list})
+    return jsonify(feature_dict)
 
 
 @app.route(routes["name"])
