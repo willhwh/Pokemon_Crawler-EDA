@@ -46,10 +46,10 @@ version_infos=[
             "/api/type/<type>":[
                 {
                     "Type" : {
-                        'Damaged Normally by':'A list of type this Pokemon is damaged noramlly by.',
-                        'Weak to':'A list of type this Pokemon is weak to.',
-                        'Immue to':'A list of type this Pokemon is immue to.',
-                        'Resisant to':'A list of type this Pokemon is resistan to.'
+                        "Strong Against":'A list of type this Pokemon will deal additional damage.',
+                        "Weak Against":'A list of type this Pokemon will do less damage to.',
+                        "Resistant To":'A list of type this Pokemon will get less damage from.',
+                        "Vulnerable To":'A list of type this Pokemon will be caused more damage to.'
                     }
                 }
             ],
@@ -144,14 +144,12 @@ def type_select(type):
     #Create jsonify data structure
     feature_dict={}
     feature_list=[]
-    feature_dict.update({"Type":type_document["Type"]})
+    info_list=["Strong Against","Weak Against","Resistant To","Vulnerable To"]
+    for i in info_list:
+        feature_list.append({i: type_document[i]})
 
-    feature_list.append({"Strong Against": type_document["Strong Against"]})
-    feature_list.append({"Weak Against":type_document["Weak Against"]})
-    feature_list.append({"Resistant To":type_document["Resistant To"]})
-    feature_list.append({"Vulnerable To":type_document["Vulnerable To"]})
+    feature_dict.update({type_document["Type"]:feature_list})
 
-    feature_dict.update({"Detail":feature_list})
     return jsonify(feature_dict)
 
 
@@ -192,13 +190,12 @@ def name_select(name):
     #Create jsonify data structure
     feature_dict={}
     feature_list=[]
-    feature_dict.update({"Name":name_document["Name"]})
     info_list=['Type1','Type2','Link','HP','ATK','DEF','SP_ATK','SP_DEF','SPD',
                 'Damaged Normally by','Weak to', 'Immue to', 'Resisant to']
     for i in info_list:
         feature_list.append({i: name_document[i]})
 
-    feature_dict.update({"Detail":feature_list})
+    feature_dict.update({name_document["Name"]:feature_list})
     return jsonify(feature_dict)
 
 
