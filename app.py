@@ -110,7 +110,7 @@ def api_docs():
 @app.route(routes["type"])
 def type():
     """
-    The type list.
+    The available types.
 
     Returns
     -------
@@ -131,13 +131,13 @@ def type():
 @app.route(routes["type_select"])
 def type_select(type):
     """
-    The selected type's detail.
+    The detail of selected type.
 
     Returns
     -------
     A list of strength and weakness for selected type.
     """
-    #Retrieved type list from database.
+    #Retrieved the <type>'s info from database.
     print(type)
     type_document=pokemon_collection.find_one({'Type': type})
 
@@ -158,7 +158,7 @@ def type_select(type):
 @app.route(routes["name"])
 def name():
     """
-    The name list.
+    The available names.
 
     Returns
     -------
@@ -177,6 +177,29 @@ def name():
 
     return jsonify(name_list)
 
+@app.route(routes["name_select"])
+def name_select(name):
+    """
+    The detail of selected (Pokemon) name.
+
+    Returns
+    -------
+    The basic scores for selected (Pokemon) name.
+    """
+    #Retrieved the <name>'s info from database.
+    name_document=pokemon_collection.find_one({"Name":name})
+
+    #Create jsonify data structure
+    feature_dict={}
+    feature_list=[]
+    feature_dict.update({"Name":name_document["Name"]})
+    info_list=['Type1','Type2','Link','HP','ATK','DEF','SP_ATK','SP_DEF','SPD',
+                'Damaged Normally by','Weak to', 'Immue to', 'Resisant to']
+    for i in info_list:
+        feature_list.append({i: name_document[i]})
+
+    feature_dict.update({"Detail":feature_list})
+    return jsonify(feature_dict)
 
 
 ########################################
