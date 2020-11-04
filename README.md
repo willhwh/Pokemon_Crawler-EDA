@@ -109,14 +109,32 @@ After finishing the <strong>How to Run section</strong>, the server should be ru
     Open a browser and enter the localhost URL to go to the homepage.
   </li>
   <li>
-    You should see a webpage similar to the below screenshot:
+    You should see a webpage similar to the below screenshot:<br>
     <img src="screenshots/home.png" >
   </li>
   <li>
-    Add the '/api' to the end of the homepage url. You will see the API document on the screen.
+    Add the '/api' to the end of the homepage url. You will see the API document on the screen.<br>
     <img src="screenshots/api_document.png">
   </li>
 </ol>
+<ul>
+    <li>
+        Add the '/api/name' to the end of the homepage url to see a list of all available names.<br>
+        <img src="screenshots/name_list.png">
+    </li>
+    <li>
+        Add the '/api/name/_a_name_' to the end of the homepage url to see the information for particular pokemon.<br>
+        <img src="screenshots/name_info.png">
+    </li>
+    <li>
+        Add the '/api/type' to the end of the homepage url to see a list of all available types.<br>
+        <img src="screenshots/type_list.png">
+    </li>
+    <li>
+        Add the '/api/name/_a_type_' to the end of the homepage url to see the effectiviness for particular type<br>
+        <img src="screenshots/type_info.png">
+    </li>
+</ul>
 
 
 ## Sources
