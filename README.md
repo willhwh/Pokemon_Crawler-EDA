@@ -1,6 +1,8 @@
 # Pokemon_Scraper-API
 
 <em>Will Huang</em>
+<br>
+<img src='screenshots/preview.png'>
 
 ## Project Summary
 <ol>
