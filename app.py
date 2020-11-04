@@ -24,7 +24,8 @@ pokemon_collection = mongo.db.Pokemon_Table
 
 
 routes = {
-    "home": "/api",
+    "home": '/',
+    "api_document":"/api",
     "type":'/api/type',
     "type_select":"/api/type/<type>",
     "name":'/api/name',
@@ -33,6 +34,12 @@ routes = {
 
 templates = {
     "home": "index.html",
+}
+
+welcome_page = {
+    "Hi! ":"Welcome to Pokemon API!",
+    "How to use? ":"Add '/api' to the end of the home page url to see the API document.",
+    "Source": "The Pokemon Dataset is retrieved from Bulbapedia and Eurogamer."
 }
 
 version_infos=[
@@ -79,6 +86,18 @@ version_infos=[
 
 
 @app.route(routes["home"])
+def home():
+    """
+    The api document page.
+
+    Returns
+    -------
+    A jsonify api documentation.
+    """
+
+    return jsonify(welcome_page)
+
+@app.route(routes["api_document"])
 def api_docs():
     """
     The api document page.
