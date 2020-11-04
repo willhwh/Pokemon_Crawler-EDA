@@ -24,8 +24,7 @@ pokemon_collection = mongo.db.Pokemon_Table
 
 
 routes = {
-    "home": "/",
-    "api_docs": "/api",
+    "home": "/api",
     "type":'/api/type',
     "type_select":"/api/type/<type>",
     "name":'/api/name',
@@ -34,10 +33,7 @@ routes = {
 
 templates = {
     "home": "index.html",
-    "api_docs": "api_docs.html",
-    "api_versions": "api_versions.html"
 }
-
 
 version_infos=[
     {
@@ -81,28 +77,15 @@ version_infos=[
 # ROUTES
 ########################################
 
+
 @app.route(routes["home"])
-def home():
-    """
-    The homepage.
-
-    Returns
-    -------
-    Flask Rendered Template :
-        The HTML to show.
-    """
-    type_document=pokemon_collection.find_one({"Search_Id":'Type_List'})
-    return render_template(templates["home"],type_document=type_document)
-
-
-@app.route(routes["api_docs"])
 def api_docs():
     """
     The api document page.
 
     Returns
     -------
-    A jsonify documentation
+    A jsonify api documentation.
     """
 
     return jsonify(version_infos[0]['documentation'])
@@ -114,7 +97,7 @@ def type():
 
     Returns
     -------
-    A list of pokemon type
+    A list of pokemon type.
     """
     #Retrieved type list from database.
     type_document=pokemon_collection.find_one({"Search_Id":'Type_List'})
@@ -160,7 +143,7 @@ def name():
 
     Returns
     -------
-    A list of pokemon name
+    A list of pokemon name.
     """
     #Retrieved name list from database.
     name_document=pokemon_collection.find({"Search_Id":'Pokemon_List'})
